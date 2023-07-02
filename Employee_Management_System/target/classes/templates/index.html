@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#">Employee Management Sysem</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" th:href="@{/addnew}">Add Employee</a>
+					</li>
+				</ul>
+
+				<form class="d-flex" th:action="@{/search}" method="GET">
+					<input class="form-control" type="search" name="keyword" th:value="${keyword}" placeholder="Search"
+						aria-label="Search" size="50">
+					<button class="btn btn-success" type="submit">Search</button>
+				</form>
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Setting
+						</a>
+						<div  class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#aboutModal">About</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#contactModal">Contact</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container my-2" align="center">
+
+		<h3>Employee List</h3>
+		<!--<a th:href="@{/addnew}" class="btn btn-primary btn-sm mb-3" >Add Employee</a> -->
+		<table class="table table-dark">
+
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Action</th>
+				</tr>
+
+			</thead>
+			<tbody class="bg-secondary">
+				<tr scope="row" th:each="employee:${emplist}">
+					<td th:text="${employee.name}"></td>
+					<td th:text="${employee.email}"></td>
+					<td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
+						<a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+				<tr th:if="${emp}">
+					<td class="bg-secondary" th:text="${NoEmp}"></td>
+					<td class="bg-secondary"></td>
+					<td class="bg-secondary"></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	
+	<div th:replace="includes/about"></div>
+	<div th:replace="includes/contact"></div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

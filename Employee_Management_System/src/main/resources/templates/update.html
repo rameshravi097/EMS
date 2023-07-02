@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee Management System</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#">Employee Management Sytsem</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+					</li>
+
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Setting
+						</a>
+						<div  class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#aboutModal">About</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#contactModal">Contact</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+	</nav>
+	<div class="container my-2 mt-2" align="center">
+
+		<div class="card mb-3" style="max-width: 30rem;">
+			<div class="card-header bg-secondary text-white">Update Employee</div>
+			<div class="card-body ">
+
+				<form action="#" th:action="@{/save}" th:object="${employee}" method="POST">
+					<input type="hidden" th:field="*{id}" />
+					<div class="form-group">
+						<input type="text" class="form-control" th:field="*{Name}" placeholder="Enter Your Name"
+							required>
+					</div>
+					<div class="form-group">
+						<input type="email" class="form-control" th:field="*{email}" id="exampleInputEmail1"
+							aria-describedby="emailHelp" placeholder="Enter Your Email" required>
+					</div>
+					<div>
+					<a href="#" th:href="@{/}" class="btn btn-primary">Back</a>
+					<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</form>
+
+			</div>
+			
+		</div>
+
+	</div>
+	
+	<div th:replace="includes/about"></div>
+	<div th:replace="includes/contact"></div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
